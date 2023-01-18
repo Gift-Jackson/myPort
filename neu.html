@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neumorphism</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            padding: 0 10rem;
+            height: 100vh;
+            font-family: verdana;
+            background:rgb(30, 30, 41);
+            overflow-x: hidden;
+        }
+        header{
+            position: relative;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background:rgb(30, 30, 41);
+            z-index: 5;
+            opacity: 0;
+            transform:translatey(-90px);
+            animation: header 0.5s linear 1 forwards;
+        }
+        @keyframes header{
+            from{
+                opacity: 0;
+                transform:translatey(-90px);
+            }
+            to{
+                opacity: 1;
+                transform:translatey(0px);
+            }
+        }
+        #chk{
+            display: none;
+        }
+        label{
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 0;
+        }
+        label:hover{
+            color: red;
+        }
+        .cancel, .bar{
+            display: none;
+        }
+        .logo h1{
+            font-size: 25px;
+            color: skyblue;
+            cursor: pointer;
+            color: #fff;
+        }
+        .mark{
+            color: red;
+        }
+        nav, nav ul{
+            display: flex;
+            list-style: none;
+        }
+        nav ul li{
+            margin-left: 40px;
+        }
+        nav ul li a{
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 10px;
+            transition: 0.25s;
+        }
+        nav ul li a::before{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            width: 100%;
+            background-color: red;
+            border-radius: 20px;
+            transform: scalex(0);
+            transform-origin: right;
+            transition:transform 0.25s linear;
+        }
+        nav ul li a:hover::before{
+            transform: scalex(1);
+            transform-origin: left;
+        }
+        nav ul li a:hover{
+            letter-spacing: 2px;
+        }
+        /*Parent Container*/
+        #container{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 580px;
+            color: #fff;
+            border-bottom: 2px solid #fff;
+        }
+        .left{
+            opacity: 0;
+            transform:translatey(50px);
+            animation: left 0.5s linear 0.5s 1 forwards;
+        }
+        @keyframes left{
+            from{
+                opacity: 0;
+                transform:translatey(50px);
+            }
+            to{
+                opacity: 1;
+                transform:translatey(0px);
+            }
+        }
+        .right{
+            opacity: 0;
+            z-index: -1;
+            transform:translatex(200px);
+            animation: right 0.5s linear 0.5s 1 forwards;
+        }
+        @keyframes right{
+            from{
+                opacity: 0;
+                transform:translatex(200px);
+            }
+            to{
+                opacity: 1;
+                transform:translatex(0px);
+            }
+        }
+        p{
+            padding-top: 10px;
+        }
+        .wrap h1{
+            font-size: 70px;
+            letter-spacing: 1px;
+        }
+        .wrap h3{
+            letter-spacing: 1px;
+        }
+        .btn-1{
+            height: 45px;
+            width: 190px;
+            border: none;
+            border-radius: 0.4rem;
+            color: #fff;
+            background-color: red;
+            margin-top: 40px;
+            font-size: 15px;
+            letter-spacing: 1px;
+            position: relative;
+            transition: 0.25s;
+            overflow: hidden;
+        }
+        .btn-1::after{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 45px;
+            width: 190px;
+            background-color: #fff;
+            border-radius: 0.4rem;
+            transform: scalex(0);
+            transform-origin: right;
+            transition:transform 0.25s linear;
+            z-index: -2;
+        }
+        .btn-1:hover::after{
+            transform: scalex(1);
+            transform-origin: left;
+        }
+        .btn-1:hover{
+            color: #000;
+            z-index: 2;
+            font-size: 17px;
+        }
+        /*About Section*/
+        .wrap .box{
+            margin-top: 35px;
+        }
+        .box .progress{
+            margin-top: 20px;
+        }
+        /*Contact Section*/
+        #wrapper{
+            height: 580px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+        }
+        .form{
+            width: 400px;
+        }
+        .form input{
+            width: 100%;
+            height: 50px;
+            margin-top: 30px;
+            padding-left: 10px;
+            border: none;
+            border-radius: 0.4rem;
+            color: #fff;
+            background-color: rgba(0,0,0,0.3);
+        }
+        .form textarea{
+            height: 90px;
+            width: 100%;
+            margin-top: 30px;
+            padding-left: 10px;
+            padding-top: 10px;
+            border: none;
+            border-radius: 0.4rem;
+            color: #fff;
+            background-color: rgba(0,0,0,0.3);
+        }
+        #wrapper h1, #wrapper h3, .about{
+            margin-bottom: 20px;
+        }
+        /*Portfolio Section*/
+        #box{
+            height: 580px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid #fff;
+        }
+        .port{
+            text-align: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .port .circle{
+            height: 80px;
+            width: 80px;
+            margin-bottom: 30px;
+            border-radius: 50%;
+            border: 7px solid rgba(0,0,0,0.3);
+            border-bottom: 7px solid red;
+            animation: load 0.5s linear infinite;
+        }
+        @keyframes load{
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+        /*Navigator btns*/
+        .nav{
+            position: fixed;
+            top: 42%;
+            right: 0;
+        }
+        .nav-btn{
+            display: flex;
+            flex-direction: column;
+        }
+        .btn{
+            height: 40px;
+            width: 35px;
+            font-size: 17px;
+            font-weight: 600;
+            border: none;
+            color: #fff;
+            opacity: 0.5;
+            margin-bottom: 5px;
+            background-color: red;
+        }
+        .btn:hover{
+            opacity: 1;
+        }
+        .cancel{
+                display: none;
+        }
+       
+
+
+        /*Media Queries*/
+        @media (max-width:1020px) {
+            body{
+                padding: 0;
+                height: 100vh;
+            }
+            header{
+                justify-content: space-between;
+            }
+            .logo{
+                margin: auto 1rem;
+            }
+            .bar, .cancel{
+                margin: auto 1rem;
+            }
+            .bar{
+                display: block;
+            }
+            p{
+                font-size: 13px;
+                padding-top: 10px;
+                transform: scaleY(1.1);
+            }
+            nav ul{
+                display: block;
+                width: 50%;
+                position: fixed;
+                height: 100vh;
+                top: 0;
+                left: -50%;
+                text-align: center;
+                padding-top: 60px;
+                transition: 0.25s;
+                background:rgb(30, 30, 41);
+                z-index: 8;
+            }
+            nav ul li{
+                line-height: 60px;
+                margin-left: 0;
+            }
+            nav ul li:hover{
+                background-color: #555;
+            }
+            nav ul li:hover a{
+                letter-spacing: 2px;
+            }
+            #chk:checked ~ nav ul{
+                left: 0;
+            }
+            #chk:checked ~ .bar{
+                display: none;
+            }
+            #chk:checked ~ .cancel{
+                display: block;
+            }
+            #container{
+                height: auto;
+                flex-direction: column-reverse;
+            }
+            .wrap{
+                width: 100%;
+                padding: 2rem;
+                text-align: center;
+            }
+            .wrap h1{
+                font-size: 50px;
+            }
+            /*About Section*/
+            .wrap .box{
+                text-align: center;
+            }
+            .progress{
+                text-align: left;
+            }
+            /*Contact Section*/
+            #wrapper{
+                height: auto;
+                flex-direction: column;
+            }
+            .form{
+                width: auto;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <a name="top"></a>
+    <a name="home"></a>
+    <header>
+        <input type="checkbox" id="chk">
+        <label for="chk" class="bar">&#9776;</label>
+        <label for="chk" class="cancel">&times;</label>
+        <div class="logo">
+            <h1>my<span class="mark">Port</span></h1>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#port">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!--Introduction-->
+    <section id="container">
+        <div class="wrap left">
+            <h3 class="mark">Hello!</h3>
+            <h1>I'M GIFT<br>JACK<span class="mark">SON</span></h1>
+            <h3>Freelancer (Front-End Developer)</h3>
+            <a href="#contact"><button class="btn-1">Hire Me!</button></a>
+        </div>
+        <div class="wrap right">
+            <div class="image">
+                <img src="avatar.JPG" alt="my avatar" height="500px">
+            </div>
+        </div>
+    </section>
+
+    <!--About Me Section-->
+    <a name="about"></a>
+    <section id="container">
+        <div class="wrap">
+            <div class="image">
+                <img src="avatar.JPG" alt="my avatar" height="500px">
+            </div>
+        </div>
+        <div class="wrap">
+            <h1 class="about">About <span class="mark">Me</span></h1>
+            <h3 class="mark">Lorem ipsum dolor sit amet consectetur.</h3>
+            <p class="about">Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>
+                 Magnam est rerum fugit aut quia eaque molestiae
+                 rem<br> nam qui quo fuga odio, id esse ullam.
+            </p>
+            <div class="box">
+                <h3>My <span class="mark">Skills</span></h3>
+                <div class="progress">
+                    <h4>HTML5</h4><br>
+                    <progress max="100" value="90"></progress>
+                </div>
+                <div class="progress">
+                    <h4>CSS3/ Tailwind/ Bootstrap</h4><br>
+                    <progress max="100" value="77"></progress>
+                </div>
+                <div class="progress">
+                    <h4>ES6 JavaScript</h4><br>
+                    <progress max="100" value="60"></progress>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Portfolio Section-->
+    <a name="port"></a>
+    <section id="box">
+        <div class="port">
+            <div class="circle"></div>
+            <p>Loading Files From GitHub...</p>
+        </div>
+    </section>
+
+    <!--Contact Section-->
+    <a name="contact"></a>
+    <section id="wrapper">
+        <div class="wrap">
+            <h1>Contact <span class="mark">Me</span></h1>
+            <h3 class="mark">Let's Work Together!</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>
+                 Quos, nesciunt sapiente. Fugit officia <br>aspernatur qui
+                 a eveniet reiciendis praesentium veniam.
+            </p>
+            <button class="btn-1">Download CV &rarr;</button>
+        </div>
+        <div class="wrap">
+            <div class="form">
+                <input type="text" placeholder="Fullname">
+                <input type="email" placeholder="E-mail Address">
+                <textarea placeholder="Enter Your Text..."></textarea>
+                <button class="btn-1">Send Now!</button>
+            </div>
+        </div>
+    </section>
+    <!--Navigators-->
+    <div class="nav">
+        <div class="nav-btn">
+            <a href="#top"><button class="btn">&uarr;</button></a>
+            <a href="#bottom"><button class="btn">&darr;</button></a>
+        </div>
+    </div>
+    <a name="bottom"></a>
+</body>
+</html>
